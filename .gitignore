@@ -1,0 +1,54 @@
+# General
+node_modules/
+dist/
+build/
+.vscode/
+.idea/
+*.swp
+*.swo
+*.log
+*.tmp
+.DS_Store
+
+# Frontend (React/TypeScript)
+# Dependency directories
+client/node_modules/
+
+# Build output
+client/build/
+client/dist/
+
+# Misc
+client/.cache/
+client/coverage/
+client/public/
+
+# TypeScript error logs
+client/tsconfig.tsbuildinfo
+
+# Environment files
+client/.env
+client/.env.local
+client/.env.development.local
+client/.env.test.local
+client/.env.production.local
+
+# Backend (.NET Core)
+# Binaries and intermediates
+server/bin/
+server/obj/
+
+# User-specific files
+server/*.user
+server/*.suo
+
+# VS Code settings
+server/.vs/
+
+# ReSharper / Rider
+server/.idea/
+
+# User secrets
+server/appsecrets.json
+
+# End of .gitignore
