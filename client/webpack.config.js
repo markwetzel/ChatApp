@@ -1,27 +1,51 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
 
 module.exports = {
-  mode: 'development',
+  mode: "development",
+
+  entry: "./src/index.tsx",
+
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
+  },
+
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
+  },
+
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'], 
+            presets: [
+              "@babel/preset-env",
+              ["@babel/preset-react", { runtime: "automatic" }],
+              "@babel/preset-typescript",
+            ],
           },
         },
       },
     ],
   },
+
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html',
+      template: "./public/index.html",
     }),
   ],
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'], 
+
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "public"),
+    },
+    port: 3000,
+    open: true,
+    hot: true,
   },
 };
