@@ -1,7 +1,9 @@
 // src/index.tsx
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client'; 
+import App from './App'; 
 
-const App = () => <div>Hello, world!</div>;
+const container = document.getElementById('root') as HTMLElement;
+const root = createRoot(container); 
+root.render(<App />); // Use root.render instead of ReactDOM.render - React 18
 
-ReactDOM.render(<App />, document.getElementById("root"));
+
