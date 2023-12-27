@@ -1,8 +1,13 @@
 import React, { createContext, useState } from "react";
 
+interface Message {
+  text: string;
+  timestamp: Date;
+}
+
 // Shape of our context state
 interface ChatContextType {
-  messages: string[];
+  messages: Message[];
   addMessage: (message: string) => void;
 }
 
@@ -17,10 +22,14 @@ interface ChatProviderProps {
 }
 
 export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
-  const [messages, setMessages] = useState<string[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   const addMessage = (message: string) => {
-    setMessages((prevMessages) => [...prevMessages, message]);
+    const newMessage: Message = {
+      text: message,
+      timestamp: new Date(),
+    };
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
   };
 
   return (
