@@ -12,8 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "date-fns": "^3.0.6",
-    "date-fns-tz": "^2.0.0",
+    "luxon": "^3.4.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -22,6 +21,7 @@
     "@babel/preset-env": "^7.23.6",
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
+    "@types/luxon": "^3.3.8",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
     "babel-loader": "^9.1.3",
