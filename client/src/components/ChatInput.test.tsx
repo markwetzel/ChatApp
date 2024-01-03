@@ -1,4 +1,4 @@
-import '@testing-library/jest-dom';
+import "@testing-library/jest-dom";
 
 import { render, screen, fireEvent } from "@testing-library/react";
 import ChatInput from "./ChatInput";
@@ -9,7 +9,7 @@ describe("ChatInput", () => {
   const mockAddMessage = jest.fn();
 
   const mockContextValue = {
-    messages: [], 
+    messages: [],
     addMessage: mockAddMessage,
   };
 
@@ -26,7 +26,7 @@ describe("ChatInput", () => {
   });
 
   test("allows typing in the input", () => {
-    const inputElement = screen.getByRole('textbox') as HTMLInputElement;
+    const inputElement = screen.getByRole("textbox") as HTMLInputElement;
     fireEvent.change(inputElement, { target: { value: "Hello, world!" } });
     expect(inputElement.value).toBe("Hello, world!");
   });
@@ -47,10 +47,26 @@ describe("ChatInput", () => {
   });
 
   test("clears input after message sent", () => {
-    const inputElement = screen.getByRole('textbox') as HTMLInputElement;
+    const inputElement = screen.getByRole("textbox") as HTMLInputElement;
     const sendButton = screen.getByRole("button", { name: /send/i });
     fireEvent.change(inputElement, { target: { value: "Test message" } });
     fireEvent.click(sendButton);
     expect(inputElement.value).toBe("");
+  });
+
+  test("send button is only enabled if the text input is 'sendable'", () => {
+    const inputElement = screen.getByRole("textbox") as HTMLInputElement;
+    const sendButton = screen.getByRole("button", { name: /send/i });
+
+    // Initially, the button should be disabled because the input is empty
+    expect(sendButton).toBeDisabled();
+
+    // Typing a valid message should enable the button
+    fireEvent.change(inputElement, { target: { value: "Valid message" } });
+    expect(sendButton).toBeEnabled();
+
+    // Clearing the input (making it non-sendable) should disable the button again
+    fireEvent.change(inputElement, { target: { value: "" } });
+    expect(sendButton).toBeDisabled();
   });
 });

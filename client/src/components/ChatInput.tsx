@@ -12,6 +12,8 @@ const ChatInput = () => {
     }
   };
 
+  const isDisabled = input.trim() === "";
+
   const sendMessage = () => {
     if (input.trim() === "") return;
 
@@ -26,7 +28,7 @@ const ChatInput = () => {
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={handleKeyDown}
       />
-      <button onClick={sendMessage}>Send</button>
+      <button disabled={isDisabled} onClick={sendMessage}>Send</button>
     </div>
   );
 };
