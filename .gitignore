@@ -51,4 +51,6 @@ server/.idea/
 # User secrets
 server/appsecrets.json
 
+*.css.d.ts
+
 # End of .gitignore

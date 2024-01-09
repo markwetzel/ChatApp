@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { ChatContext } from "../context/ChatContext";
+import styles from "./ChatInput.module.css";
 
 const ChatInput = () => {
   const { addMessage } = useContext(ChatContext);
@@ -22,13 +23,16 @@ const ChatInput = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <input
+        className={styles.input}
         value={input}
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={handleKeyDown}
       />
-      <button disabled={isDisabled} onClick={sendMessage}>Send</button>
+      <button disabled={isDisabled} onClick={sendMessage}>
+        Send
+      </button>
     </div>
   );
 };

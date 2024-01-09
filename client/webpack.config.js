@@ -3,18 +3,14 @@ const path = require("path");
 
 module.exports = {
   mode: "development",
-
   entry: "./src/index.tsx",
-
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
   },
-
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
-
   module: {
     rules: [
       {
@@ -31,21 +27,30 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.module\.css$/,
+        use: [
+          'style-loader', 
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            },
+          },
+        ],
+      },
     ],
   },
-
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html",
     }),
   ],
-
   devServer: {
     static: {
       directory: path.join(__dirname, "public"),
     },
     port: 3000,
-    // open: true,
     hot: true,
   },
 };
