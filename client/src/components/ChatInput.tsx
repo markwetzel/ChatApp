@@ -18,7 +18,7 @@ const ChatInput = () => {
   const sendMessage = () => {
     if (input.trim() === "") return;
 
-    addMessage(input);
+    addMessage("12345", input);
     setInput("");
   };
 

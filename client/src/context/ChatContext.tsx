@@ -1,18 +1,19 @@
 import React, { createContext, useState } from "react";
-
-interface Message {
-  text: string;
-  timestamp: Date;
-}
+import { Message } from "../components/Message";
+import { User } from "../components/User";
 
 // Shape of our context state
 interface ChatContextType {
+  users: User[];
+  addUser: (username: string) => void;
   messages: Message[];
-  addMessage: (message: string) => void;
+  addMessage: (userId: string, message: string) => void;
 }
 
 // We create the context with a default value
 export const ChatContext = createContext<ChatContextType>({
+  users: [],
+  addUser: () => {},
   messages: [],
   addMessage: () => {},
 });
@@ -22,8 +23,13 @@ interface ChatProviderProps {
 }
 
 export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
+  const [users, setUsers] = useState<User[]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
 
+  const addUser = (username: string) => {
+    const newUser: User = { id: generateUniqueId(), username }; // Implement generateUniqueId function
+    setUsers((prevUsers) => [...prevUsers, newUser]);
+  };
   const addMessage = (message: string) => {
     const newMessage: Message = {
       text: message,
@@ -33,8 +39,11 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
   };
 
   return (
-    <ChatContext.Provider value={{ messages, addMessage }}>
+    <ChatContext.Provider value={{ messages, addMessage, addUser, users }}>
       {children}
     </ChatContext.Provider>
   );
 };
+function generateUniqueId(): string {
+  return Math.random().toString(36).substr(2, 9);
+}

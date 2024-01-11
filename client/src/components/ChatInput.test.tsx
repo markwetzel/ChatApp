@@ -11,6 +11,8 @@ describe("ChatInput", () => {
   const mockContextValue = {
     messages: [],
     addMessage: mockAddMessage,
+    users: [],
+    addUser: () => {},
   };
 
   beforeEach(() => {

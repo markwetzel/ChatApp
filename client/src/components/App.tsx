@@ -1,14 +1,33 @@
-import { ChatProvider } from "../context/ChatContext";
+import { useContext, useState, useEffect } from "react";
+import { ChatContext } from "../context/ChatContext";
 import ChatInput from "./ChatInput";
 import ChatWindow from "./ChatWindow";
+import UserList from "./UserList";
+import UsernamePage from "./UsernamePage";
 
-type Props = {};
+const App = () => {
+  const { addUser } = useContext(ChatContext);
+  const [username, setUsername] = useState("");
+  const [isUserAdded, setIsUserAdded] = useState(false);
 
-const App = (props: Props) => {
-  return <ChatProvider>
-    <ChatWindow />
-    <ChatInput />
-  </ChatProvider>;
+  useEffect(() => {
+    if (username && !isUserAdded) {
+      addUser(username);
+      setIsUserAdded(true);
+    }
+  }, [username, isUserAdded, addUser]);
+
+  if (!isUserAdded) {
+    return <UsernamePage setUsername={setUsername} />;
+  }
+
+  return (
+    <>
+      <ChatWindow />
+      <UserList />
+      <ChatInput />
+    </>
+  );
 };
 
 export default App;
