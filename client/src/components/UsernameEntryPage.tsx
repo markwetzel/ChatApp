@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import styles from "./UsernameEntryPage.module.css";
 
 interface UsernamePageProps {
   setUsername: (username: string) => void;
@@ -12,18 +13,26 @@ const UsernameEntryPage = ({ setUsername }: UsernamePageProps) => {
     setUsername(tempUsername);
   };
 
+  useEffect(() => {
+    const inputElement = document.getElementById("username");
+    if (inputElement) inputElement.focus();
+  }, []);
+
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='username'>Enter your username:</label>
-        <input
+    <div className={styles.container}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+      <label htmlFor='username' className={styles.label}>Enter your username:</label>        <input
           id='username'
           type='text'
           value={tempUsername}
           onChange={(e) => setTempUsername(e.target.value)}
           required
+          className={styles.input}
+          placeholder="e.g. 'John Doe'"
         />
-        <button type='submit'>Join Chat</button>
+        <button type='submit' className={styles.button}>
+          Join Chat
+        </button>
       </form>
     </div>
   );
