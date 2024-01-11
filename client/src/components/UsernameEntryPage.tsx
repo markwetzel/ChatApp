@@ -4,7 +4,7 @@ interface UsernamePageProps {
   setUsername: (username: string) => void;
 }
 
-const UsernamePage = ({ setUsername }: UsernamePageProps) => {
+const UsernameEntryPage = ({ setUsername }: UsernamePageProps) => {
   const [tempUsername, setTempUsername] = useState("");
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
@@ -29,4 +29,4 @@ const UsernamePage = ({ setUsername }: UsernamePageProps) => {
   );
 };
 
-export default UsernamePage;
+export default UsernameEntryPage;

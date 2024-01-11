@@ -1,9 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { ChatContext } from "../context/ChatContext";
-import ChatInput from "./ChatInput";
-import ChatWindow from "./ChatWindow";
-import UserList from "./UserList";
-import UsernamePage from "./UsernamePage";
+import UsernameEntryPage from "./UsernameEntryPage";
+import ChatInterface from "./ChatInterface";
 
 const App = () => {
   const { addUser } = useContext(ChatContext);
@@ -18,16 +16,10 @@ const App = () => {
   }, [username, isUserAdded, addUser]);
 
   if (!isUserAdded) {
-    return <UsernamePage setUsername={setUsername} />;
+    return <UsernameEntryPage setUsername={setUsername} />;
   }
 
-  return (
-    <>
-      <ChatWindow />
-      <UserList />
-      <ChatInput />
-    </>
-  );
+  return <ChatInterface />;
 };
 
 export default App;
