@@ -7,10 +7,16 @@ interface UsernamePageProps {
 
 const UsernameEntryPage = ({ setUsername }: UsernamePageProps) => {
   const [tempUsername, setTempUsername] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    setUsername(tempUsername);
+    if (tempUsername.trim().length < 3) {
+      setError("Username must be at least 3 characters long");
+    } else {
+      setUsername(tempUsername);
+      setError("");
+    }
   };
 
   useEffect(() => {
@@ -21,7 +27,11 @@ const UsernameEntryPage = ({ setUsername }: UsernamePageProps) => {
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.form}>
-      <label htmlFor='username' className={styles.label}>Enter your username:</label>        <input
+        <label htmlFor='username' className={styles.label}>
+          Enter your username:
+        </label>
+        <input
+          autoComplete='off'
           id='username'
           type='text'
           value={tempUsername}
@@ -29,8 +39,20 @@ const UsernameEntryPage = ({ setUsername }: UsernamePageProps) => {
           required
           className={styles.input}
           placeholder="e.g. 'John Doe'"
+          maxLength={20}
         />
-        <button type='submit' className={styles.button}>
+        {error && <p className={styles.error}>{error}</p>}
+        <button
+          type='submit'
+          className={`${styles.button} ${
+            tempUsername.trim().length < 3 || tempUsername.trim().length > 20
+              ? styles.disabled
+              : ""
+          }`}
+          disabled={
+            tempUsername.trim().length < 3 || tempUsername.trim().length > 20
+          }
+        >
           Join Chat
         </button>
       </form>

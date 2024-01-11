@@ -5,7 +5,7 @@
   align-items: center;
   height: 100vh;
   background-color: #eff0f1;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
 }
 
 .form {
@@ -20,7 +20,7 @@
 
 .label {
   font-size: 1.2em;
-  color: #008B00;
+  color: #008b00;
   margin-bottom: 10px;
 }
 
@@ -28,14 +28,24 @@
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #008B00;
+  border: 1px solid #008b00;
 }
 
 .button {
   padding: 10px;
   border-radius: 5px;
   border: none;
-  background-color: #008B00;
+  background-color: #008b00;
   color: white;
   cursor: pointer;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+.button.disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
 }
